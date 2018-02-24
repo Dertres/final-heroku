@@ -9,6 +9,15 @@ public class Mensajito {
     private String cuerpo;
     private LocalDate fecha;
 
+    public Mensajito(String id) {
+        this.id = id;
+    }
+
+    public Mensajito(String titulo, String cuerpo) {
+        this.titulo = titulo;
+        this.cuerpo = cuerpo;
+    }
+
     public String getId() {
         return id;
     }
