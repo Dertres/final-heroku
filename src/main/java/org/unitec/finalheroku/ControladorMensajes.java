@@ -1,9 +1,11 @@
 package org.unitec.finalheroku;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +55,20 @@ public class ControladorMensajes {
     
     }
     
+    //Guardar
+   @CrossOrigin
+   @RequestMapping(value="/mensajito", method=RequestMethod.POST,
+           headers ={"Accept=application/json"})
+   public Estatus guardarJSON(@RequestBody String json)throws Exception{
+       
+     //mapeo JSON-Java  
+      ObjectMapper maper=new ObjectMapper();
+      Mensajito mensa=  maper.readValue(json, Mensajito.class);
+       
+          repoMensa.save(mensa);
+          return new Estatus(true, "Guardado con éxito");
+       
+   }
     
     //Borrar
     @CrossOrigin
